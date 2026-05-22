@@ -30,5 +30,10 @@ export async function fetchPriceHistory(
         throw new Error(`CoinGecko request failed (${res.status})`)
     }
     const data = (await res.json()) as MarketChartResponse;
-    return data.prices.map(([timestamp, value]) => ({ date: new Date(timestamp).toLocaleDateString("en-GB", {day: "2-digit", month: "2-digit"}).split("T")[0], price: Number(value.toFixed(2)) }));
+    return data.prices.map(([timestamp, price]) => ({ 
+        date: new Date(timestamp).toLocaleDateString("en-GB", {
+            day: "2-digit",                 // TODO: tie locale to language setting
+            month: "2-digit"
+        }), 
+        price: Number(price.toFixed(2)) }));
 }
