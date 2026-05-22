@@ -32,18 +32,21 @@ A real-time cryptocurrency converter with a modern interface and smooth animatio
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. **Clone the repository**
+
 ```bash
 git clone https://github.com/your-username/crypto-converter.git
 cd crypto-converter
 ```
 
 2. **Install dependencies**
+
 ```bash
 npm install
 # or
@@ -51,6 +54,7 @@ yarn install
 ```
 
 3. **Run the project**
+
 ```bash
 npm run dev
 # or
@@ -58,6 +62,7 @@ yarn dev
 ```
 
 4. **Open in browser**
+
 ```
 [http://localhost:3000]
 (https://crypto-convertor-34vf.vercel.app)
@@ -87,12 +92,14 @@ CryptoConvertor/
 ## 🎨 Visual Features
 
 ### Design System
-- **Primary Colors**: 
+
+- **Primary Colors**:
   - Red: `#ff001b`
   - Dark Green: `#002723`, `#00433f`
   - Light Gray: `#d3d3d3`
 
 ### Animations
+
 - Floating particles in motion
 - Animated background gradients
 - Smooth element transitions
@@ -101,21 +108,22 @@ CryptoConvertor/
 ## 🌐 API Used
 
 This project uses the **CoinGecko API** to fetch:
+
 - Current Bitcoin prices
 - Historical price data
 - Multi-currency conversion
 
 ### Endpoints:
+
 - `/simple/price` - Current prices
 - `/coins/bitcoin/market_chart` - Historical data
-
-
 
 ## 📱 Responsiveness
 
 The project is fully responsive with breakpoints:
+
 - **Desktop**: > 768px
-- **Tablet**: 768px - 480px  
+- **Tablet**: 768px - 480px
 - **Mobile**: < 480px
 
 ## 🤝 Contributing
@@ -128,13 +136,7 @@ The project is fully responsive with breakpoints:
 
 ## 📝 Roadmap
 
--[ ] Add more cryptocurrencies (ETH, ADA, SOL)
--[ ] Implement light/dark theme toggle
--[ ] Add price notifications
--[ ] Create advanced dashboard
--[ ] Integrate wallet support (e.g., MetaMask)
--[ ] Conversion history
--[ ] Add purchase simulator (currently implemented, to be modularized)
+-[ ] Add more cryptocurrencies (ETH, ADA, SOL) -[ ] Implement light/dark theme toggle -[ ] Add price notifications -[ ] Create advanced dashboard -[ ] Integrate wallet support (e.g., MetaMask) -[ ] Conversion history -[ ] Add purchase simulator (currently implemented, to be modularized)
 
 ## 📄 License
 
@@ -145,4 +147,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 Developed with ❤️ by [Deborah Colicchio]
 
 ---
-

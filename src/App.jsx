@@ -1,7 +1,7 @@
 // App.jsx
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 import {
   LineChart,
   Line,
@@ -10,110 +10,116 @@ import {
   Tooltip,
   CartesianGrid,
   ResponsiveContainer,
-} from "recharts"
-import "./App.css"
+} from "recharts";
+import "./App.css";
 
 function App() {
-  const [btcAmount, setBtcAmount] = useState(1)
-  const [currency, setCurrency] = useState("usd")
-  const [converted, setConverted] = useState(null)
-  const [history, setHistory] = useState([])
-  const [language, setLanguage] = useState("pt")
+  const [btcAmount, setBtcAmount] = useState(1);
+  const [currency, setCurrency] = useState("usd");
+  const [converted, setConverted] = useState(null);
+  const [history, setHistory] = useState([]);
+  const [language, setLanguage] = useState("pt");
 
   const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "pt" ? "en" : "pt"))
-  }
+    setLanguage((prev) => (prev === "pt" ? "en" : "pt"));
+  };
 
   const currencies = [
     { value: "usd", label: "USD - Dólar Americano" },
     { value: "brl", label: "BRL - Real Brasileiro" },
     { value: "eur", label: "EUR - Euro" },
-  ]
+  ];
 
   useEffect(() => {
     const createParticles = () => {
-      const particlesContainer = document.createElement("div")
-      particlesContainer.className = "floating-particles"
-      document.body.appendChild(particlesContainer)
+      const particlesContainer = document.createElement("div");
+      particlesContainer.className = "floating-particles";
+      document.body.appendChild(particlesContainer);
 
       for (let i = 0; i < 20; i++) {
-        const particle = document.createElement("div")
-        particle.className = "particle"
-        particle.style.left = Math.random() * 100 + "%"
-        particle.style.animationDelay = Math.random() * 6 + "s"
-        particle.style.animationDuration = 6 + Math.random() * 4 + "s"
-        particlesContainer.appendChild(particle)
+        const particle = document.createElement("div");
+        particle.className = "particle";
+        particle.style.left = Math.random() * 100 + "%";
+        particle.style.animationDelay = Math.random() * 6 + "s";
+        particle.style.animationDuration = 6 + Math.random() * 4 + "s";
+        particlesContainer.appendChild(particle);
       }
-    }
+    };
 
-    createParticles()
+    createParticles();
 
     return () => {
-      const particles = document.querySelector(".floating-particles")
+      const particles = document.querySelector(".floating-particles");
       if (particles) {
-        particles.remove()
+        particles.remove();
       }
-    }
-  }, [])
+    };
+  }, []);
 
   useEffect(() => {
     async function fetchPrice() {
       try {
         const res = await fetch(
           `https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=${currency}`,
-        )
-        const data = await res.json()
-        const price = data.bitcoin[currency]
-        setConverted((btcAmount * price).toFixed(2))
+        );
+        const data = await res.json();
+        const price = data.bitcoin[currency];
+        setConverted((btcAmount * price).toFixed(2));
       } catch (err) {
-        console.error("Error fetching price:", err)
-        setConverted("Error")
+        console.error("Error fetching price:", err);
+        setConverted("Error");
       }
     }
-    fetchPrice()
-  }, [btcAmount, currency])
+    fetchPrice();
+  }, [btcAmount, currency]);
 
   useEffect(() => {
     async function fetchHistory() {
       try {
         const res = await fetch(
           `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=7`,
-        )
-        const data = await res.json()
+        );
+        const data = await res.json();
         const chartData = data.prices.map(([timestamp, price]) => ({
           date: new Date(timestamp).toLocaleDateString("pt-BR", {
             day: "2-digit",
             month: "2-digit",
           }),
           price: Number.parseFloat(price.toFixed(2)),
-        }))
-        setHistory(chartData)
+        }));
+        setHistory(chartData);
       } catch (err) {
-        console.error("Error fetching history:", err)
+        console.error("Error fetching history:", err);
       }
     }
-    fetchHistory()
-  }, [currency])
+    fetchHistory();
+  }, [currency]);
 
   const formatCurrency = (value, currencyCode) => {
     const currencySymbols = {
       usd: "$",
       brl: "R$",
       eur: "€",
-    }
+    };
 
-    return `${currencySymbols[currencyCode] || currencyCode.toUpperCase()} ${new Intl.NumberFormat("pt-BR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value)}`
-  }
+    return `${currencySymbols[currencyCode] || currencyCode.toUpperCase()} ${new Intl.NumberFormat(
+      "pt-BR",
+      {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    ).format(value)}`;
+  };
 
   return (
     <div className="app-container">
       <div style={{ textAlign: "right", marginBottom: "1rem" }}>
-          <button onClick={() => setLanguage(language === "en" ? "pt" : "en")} className="language-toggle">
-    {language === "en" ? "Português" : "English"}
-          </button>
+        <button
+          onClick={() => setLanguage(language === "en" ? "pt" : "en")}
+          className="language-toggle"
+        >
+          {language === "en" ? "Português" : "English"}
+        </button>
       </div>
 
       <h1 className="app-title">
@@ -131,10 +137,16 @@ function App() {
             className="btc-input"
             type="number"
             value={btcAmount}
-            onChange={(e) => setBtcAmount(Number.parseFloat(e.target.value) || 0)}
+            onChange={(e) =>
+              setBtcAmount(Number.parseFloat(e.target.value) || 0)
+            }
             min="0"
             step="0.0001"
-            placeholder={language === "pt" ? "Digite a quantidade de BTC" : "Enter BTC amount"}
+            placeholder={
+              language === "pt"
+                ? "Digite a quantidade de BTC"
+                : "Enter BTC amount"
+            }
           />
         </div>
 
@@ -148,7 +160,11 @@ function App() {
             onChange={(e) => setCurrency(e.target.value)}
           >
             {currencies.map((cur) => (
-              <option key={cur.value} value={cur.value} className="currency-option">
+              <option
+                key={cur.value}
+                value={cur.value}
+                className="currency-option"
+              >
                 {cur.label}
               </option>
             ))}
@@ -163,7 +179,9 @@ function App() {
             {converted && !isNaN(converted) ? (
               `${btcAmount} BTC = ${formatCurrency(converted, currency)}`
             ) : (
-              <span className="loading-text">{language === "pt" ? "Carregando..." : "Loading..."}</span>
+              <span className="loading-text">
+                {language === "pt" ? "Carregando..." : "Loading..."}
+              </span>
             )}
           </p>
         </div>
@@ -178,8 +196,16 @@ function App() {
           </h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={history}>
-              <XAxis dataKey="date" tick={{ fontSize: 12, fill: "#002723" }} stroke="#d3d3d3" />
-              <YAxis domain={["auto", "auto"]} tick={{ fontSize: 12, fill: "#002723" }} stroke="#d3d3d3" />
+              <XAxis
+                dataKey="date"
+                tick={{ fontSize: 12, fill: "#002723" }}
+                stroke="#d3d3d3"
+              />
+              <YAxis
+                domain={["auto", "auto"]}
+                tick={{ fontSize: 12, fill: "#002723" }}
+                stroke="#d3d3d3"
+              />
               <Tooltip
                 contentStyle={{
                   backgroundColor: "rgba(255, 255, 255, 0.95)",
@@ -188,10 +214,17 @@ function App() {
                   boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
                   color: "#010100",
                 }}
-                formatter={(value) => [formatCurrency(value, currency), "Price"]}
+                formatter={(value) => [
+                  formatCurrency(value, currency),
+                  "Price",
+                ]}
                 labelStyle={{ color: "#002723", fontWeight: "600" }}
               />
-              <CartesianGrid stroke="#d3d3d3" strokeDasharray="3 3" opacity={0.3} />
+              <CartesianGrid
+                stroke="#d3d3d3"
+                strokeDasharray="3 3"
+                opacity={0.3}
+              />
               <Line
                 type="monotone"
                 dataKey="price"
@@ -211,7 +244,7 @@ function App() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
