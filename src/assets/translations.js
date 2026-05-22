@@ -9,8 +9,8 @@ const translations = {
     chartTitle: "Bitcoin - Last 7 Days",
     languages: {
       en: "English",
-      pt: "Portuguese"
-    }
+      pt: "Portuguese",
+    },
   },
   pt: {
     title: "Conversor Cripto em Tempo Real",
@@ -21,9 +21,9 @@ const translations = {
     chartTitle: "Bitcoin - Últimos 7 Dias",
     languages: {
       en: "Inglês",
-      pt: "Português"
-    }
-  }
+      pt: "Português",
+    },
+  },
 };
 
 export default translations;
