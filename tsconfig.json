@@ -1,0 +1,32 @@
+{
+  // tsconfig.json tells TypeScript HOW to check your code.
+  // Vite/esbuild does the actual compiling — tsc here is only a type-checker.
+  "compilerOptions": {
+    /* Language target */
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"], // DOM = browser APIs (fetch, document...)
+    "useDefineForClassFields": true,
+
+    /* Modules — let Vite handle bundling */
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowJs": true,            // let .jsx and .tsx coexist during the migration
+    "isolatedModules": true,    // required because esbuild compiles one file at a time
+    "verbatimModuleSyntax": true, // forces `import type {...}` for type-only imports
+    "moduleDetection": "force",
+    "noEmit": true,             // tsc never writes files — it only reports type errors
+
+    /* React */
+    "jsx": "react-jsx",         // new JSX transform: no need to `import React`
+
+    /* The whole reason we're doing this */
+    "strict": true,             // turns on every strict type check at once
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true,
+
+    "skipLibCheck": true        // don't type-check node_modules — just trust them
+  },
+  "include": ["src"]
+}
