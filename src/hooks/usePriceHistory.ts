@@ -4,34 +4,32 @@ import type { Currency, PricePoint } from "../types"
 
 export function usePriceHistory(currency: Currency) {
 
-    const [price, setPrice] = useState<PricePoint[]>([])
+    const [history, setHistory] = useState<PricePoint[]>([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
     useEffect(() => {
         const controller = new AbortController()
 
-        async function Load(){
+        async function load(){
             setIsLoading(true)
             setError(null)
             try {
                 const data = await fetchPriceHistory(currency, controller.signal)
-                setPrice(data)
-            } catch (error) {
-                if (error instanceof Error) {
-                    setError(error.message)
-                }
+                setHistory(data)
+           } catch (err){
+                if (err instanceof DOMException && err.name === "AbortError") return 
+                setError(err instanceof Error ? err.message : "Something went wrong" )
             } finally {
-                setIsLoading(false)
+setIsLoading(false)
             }
         }
-
-        Load()
+        load()
 
         return () => {
             controller.abort()
         }
     }, [currency])
 
-    return { price, isLoading, error }
+    return { history, isLoading, error }
 }
