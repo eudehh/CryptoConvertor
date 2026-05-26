@@ -20,7 +20,7 @@ export type LanguageContextType = {
   toggleLanguage: () => void;
 };
 
-export type Translations = { 
+export type Translations = {
   title: string;
   amountLabel: string;
-}
+};
