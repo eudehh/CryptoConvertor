@@ -1,11 +1,7 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import type { ReactNode } from "react";
+import type { Language, LanguageContextType } from "../types";
 
-type Language = "pt" | "en";
-type LanguageContextType = {
-  language: Language;
-  toggleLanguage: () => void;
-};
 const LanguageContext = createContext<LanguageContextType | undefined>(
   undefined,
 );
