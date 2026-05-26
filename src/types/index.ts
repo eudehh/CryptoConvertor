@@ -12,3 +12,15 @@ export type PricePoint = {
   date: string;
   price: number;
 };
+
+export type Language = "pt" | "en";
+
+export type LanguageContextType = {
+  language: Language;
+  toggleLanguage: () => void;
+};
+
+export type Translations = { 
+  title: string;
+  amountLabel: string;
+}
